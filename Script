@@ -1,0 +1,40 @@
+CREATE TABLE Categoria (
+    id int NOT NULL PRIMARY KEY,
+    nome varchar(100) NOT NULL
+);
+
+CREATE TABLE Produto (
+	id int NOT NULL PRIMARY KEY,
+    Nome varchar(100) NOT NULL,
+    categoria_id int NOT NULL,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+);
+
+CREATE TABLE Cliente (
+	id int NOT NULL PRIMARY KEY,
+    Nome varchar(200) NOT NULL
+);
+
+CREATE TABLE Vendedor (
+	id int NOT NULL PRIMARY KEY,
+    Nome varchar(200) NOT NULL
+);
+
+CREATE TABLE Pedido (
+	id int NOT NULL PRIMARY KEY,
+    Data_Pedido datetime NOT NULL,
+    vendedor_id int NOT NULL,
+    cliente_id int NOT NULL,
+    FOREIGN KEY (vendedor_id) REFERENCES Vendedor(id),
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
+);
+
+CREATE TABLE PedidoItem (
+	id int NOT NULL PRIMARY KEY,
+    produto_id int NOT NULL,
+    pedido_id int NOT NULL,
+    quantidade float NOT NULL,
+    valor_unitario decimal NOT NULL,
+    FOREIGN KEY (produto_id) REFERENCES Produto(id),
+    FOREIGN KEY (pedido_id) REFERENCES Pedido(id)
+);
